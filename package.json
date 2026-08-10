@@ -1,0 +1,31 @@
+{
+  "name": "whatsapp-commerce-showcase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.4",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.20.0"
+}
