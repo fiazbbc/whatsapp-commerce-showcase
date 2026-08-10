@@ -1,62 +1,87 @@
-# WhatsApp Commerce Operations — Engineering Showcase
+# WhatsApp Commerce Operations — Interactive Showcase
 
-A portfolio case study for a multi-tenant commerce platform that brings
-WhatsApp conversations, catalog-grounded sales assistance, COD orders,
-inventory, delivery operations, and human handoff into one workspace.
+A public, synthetic demonstration of a commerce workspace designed around
+WhatsApp conversations. It shows how a fictional online store can answer
+product questions, prepare cash-on-delivery orders, track inventory and
+deliveries, and transfer a conversation to a human agent.
 
-This repository is deliberately limited to a synthetic-data interface,
-architecture documentation, and generic TypeScript patterns. The production
-application, integrations, data model, infrastructure, and commercial logic are
-maintained privately.
-
-## What this demonstrates
-
-- Product thinking across seller onboarding, conversations, orders, inventory,
-  delivery, billing, and administration
-- A responsive React and TypeScript operations interface
-- Tenant authorization derived from verified membership—not client input
-- Guarded order transitions and concurrency-safe inventory reservations
-- Server-authoritative prices, stock, delivery fees, totals, and statuses
-- Controlled sales-assistant tools with read-only preview enforcement
-- Unit and end-to-end testing as delivery evidence
+This repository is intentionally limited to a static interface, architecture
+documentation, and generic TypeScript patterns. The production application,
+integrations, data model, infrastructure, and commercial logic remain private.
 
 ## Demo
 
-The demo uses synthetic records only. It makes no network requests and contains
-no real WhatsApp account, customer data, credentials, API endpoints, production
-schema, or deployable backend.
+**Live demo:** _Vercel URL will be added here after the first deployment._
+
+No login, setup, or WhatsApp account is needed. Everything is already filled
+with fictional sample data and runs entirely in the browser. Visitors can use
+the tabs to explore:
+
+- **Dashboard** — a plain-language summary of today’s store activity
+- **Conversations** — sample customer questions, verified replies, and a human
+  handoff
+- **Orders** — fictional cash-on-delivery orders and their workflow stages
+- **Products & inventory** — sample variants, prices, available stock, and
+  reservations
+- **Deliveries** — fictional parcel checkpoints and expected arrival times
+
+Nothing in the demo sends messages, changes a real order, connects to an API,
+or stores visitor data.
+
+### Run locally
+
+Requirements: Node.js 22 or newer and Corepack.
 
 ```bash
 corepack enable
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
 Open `http://127.0.0.1:4173`.
 
+### Deploy on Vercel
+
+Import this GitHub repository into Vercel and deploy it with the repository
+root as the project root. The included `vercel.json` selects the Vite preset,
+runs `pnpm build`, and publishes the generated `dist` directory. No environment
+variables, database, serverless functions, or external services are required.
+
+## What this demonstrates
+
+- Product thinking across customer conversations, order capture, inventory,
+  delivery operations, and human support
+- A responsive React and TypeScript interface designed for non-technical users
+- Tenant authorization derived from verified membership rather than client
+  input
+- Guarded order transitions and concurrency-safe inventory reservations
+- Server-authoritative prices, stock, delivery fees, totals, and statuses
+- Controlled sales-assistant tools with read-only preview enforcement
+- Runnable tests for the generic engineering patterns included here
+
 ## Validation
 
 ```bash
+pnpm format:check
 pnpm typecheck
 pnpm test
 pnpm build
 ```
 
-The private implementation's latest acceptance snapshot completed 88 unit tests
-and 39 end-to-end tests. The smaller test suite in this repository verifies only
-the public, generic domain examples.
+`pnpm build` creates a self-contained static site in `dist/`.
 
 ## Repository map
 
 ```text
 src/
   domain/                 Generic, independently testable engineering patterns
-  main.tsx                Synthetic operations showcase
-  mock-data.ts            Non-sensitive display records
+  main.tsx                Interactive synthetic operations showcase
+  mock-data.ts            Fictional conversations, products, orders and delivery records
 docs/
   ARCHITECTURE.md         High-level system boundaries
   ENGINEERING.md          Selected decisions and tradeoffs
   SECURITY.md             Public security summary
+vercel.json               Static Vite deployment settings
 NOTICE.md                 Portfolio-use and copyright notice
 ```
 
