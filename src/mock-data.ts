@@ -55,6 +55,18 @@ export interface DemoDelivery {
   timeline: readonly string[];
 }
 
+export interface DemoCustomer {
+  id: string;
+  name: string;
+  city: string;
+  segment: "New" | "Returning" | "High value";
+  orders: number;
+  totalSpent: string;
+  lastOrder: string;
+  lastContact: string;
+  supportState: "Automated" | "Agent assigned" | "No open request";
+}
+
 export const metrics = [
   { label: "Revenue today", value: "PKR 184,600", change: "+18.4%", icon: "↗" },
   { label: "Confirmed orders", value: "47", change: "+9 today", icon: "□" },
@@ -269,6 +281,53 @@ export const conversations: DemoConversation[] = [
         time: "10:10",
       },
     ],
+  },
+];
+
+export const customers: DemoCustomer[] = [
+  {
+    id: "CUS-2018",
+    name: "Ayesha K.",
+    city: "Lahore",
+    segment: "New",
+    orders: 1,
+    totalSpent: "PKR 4,240",
+    lastOrder: "ORD-1048",
+    lastContact: "2 minutes ago",
+    supportState: "Automated",
+  },
+  {
+    id: "CUS-2017",
+    name: "Hamza R.",
+    city: "Karachi",
+    segment: "Returning",
+    orders: 3,
+    totalSpent: "PKR 14,420",
+    lastOrder: "ORD-1047",
+    lastContact: "11 minutes ago",
+    supportState: "Automated",
+  },
+  {
+    id: "CUS-2016",
+    name: "Mariam S.",
+    city: "Islamabad",
+    segment: "High value",
+    orders: 7,
+    totalSpent: "PKR 62,180",
+    lastOrder: "ORD-1046",
+    lastContact: "14 minutes ago",
+    supportState: "Agent assigned",
+  },
+  {
+    id: "CUS-2015",
+    name: "Bilal A.",
+    city: "Faisalabad",
+    segment: "Returning",
+    orders: 2,
+    totalSpent: "PKR 9,580",
+    lastOrder: "ORD-1045",
+    lastContact: "Yesterday",
+    supportState: "No open request",
   },
 ];
 

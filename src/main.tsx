@@ -6,6 +6,7 @@ import {
 } from "./domain/order-state-machine";
 import {
   conversations,
+  customers,
   deliveries,
   metrics,
   operationalEvents,
@@ -17,7 +18,12 @@ import "./styles.css";
 
 type PrimaryView = "demo" | "engineering";
 type DemoScreen =
-  "dashboard" | "conversations" | "orders" | "products" | "deliveries";
+  | "dashboard"
+  | "conversations"
+  | "customers"
+  | "orders"
+  | "products"
+  | "deliveries";
 
 const demoScreens: ReadonlyArray<{
   id: DemoScreen;
@@ -26,6 +32,7 @@ const demoScreens: ReadonlyArray<{
 }> = [
   { id: "dashboard", label: "Dashboard", icon: "⌂" },
   { id: "conversations", label: "Conversations", icon: "◉" },
+  { id: "customers", label: "Customers", icon: "♙" },
   { id: "orders", label: "Orders", icon: "□" },
   { id: "products", label: "Products & inventory", icon: "▦" },
   { id: "deliveries", label: "Deliveries", icon: "→" },
@@ -58,8 +65,8 @@ function App() {
       <div className="demo-notice" role="note">
         <strong>Synthetic interactive demo</strong>
         <span>
-          Every customer, message, product, order, and delivery shown here is
-          fictional. Nothing connects to WhatsApp or a live business.
+          All records are fictional, no WhatsApp account is connected, no
+          production customer data is shown, and every action is simulated.
         </span>
       </div>
 
@@ -207,6 +214,7 @@ function DemoWorkspace({
           <DashboardScreen onScreenChange={onScreenChange} />
         )}
         {activeScreen === "conversations" && <ConversationsScreen />}
+        {activeScreen === "customers" && <CustomersScreen />}
         {activeScreen === "orders" && <OrdersScreen />}
         {activeScreen === "products" && <ProductsScreen />}
         {activeScreen === "deliveries" && <DeliveriesScreen />}
@@ -473,6 +481,107 @@ function ConversationDetail({
         <span>✓ Synthetic record</span>
       </div>
     </article>
+  );
+}
+
+function CustomersScreen() {
+  const [selectedId, setSelectedId] = useState(customers[0]?.id ?? "");
+  const selected = useMemo(
+    () =>
+      customers.find((customer) => customer.id === selectedId) ?? customers[0],
+    [selectedId],
+  );
+
+  return (
+    <div className="demo-screen">
+      <ScreenHeading
+        kicker="Customer management"
+        title="A useful history without exposing private contact details"
+        description="Browse fictional customer profiles, order activity, value segments, and whether support is automated or assigned to a person."
+      />
+      <div className="customers-layout">
+        <article className="panel customer-directory">
+          <div className="panel-heading">
+            <div>
+              <span>Customer directory</span>
+              <h3>{customers.length} synthetic profiles</h3>
+            </div>
+            <span className="count-chip">No phone data</span>
+          </div>
+          <div className="customer-list">
+            {customers.map((customer) => (
+              <button
+                className={
+                  customer.id === selected?.id ? "customer-selected" : ""
+                }
+                key={customer.id}
+                onClick={() => setSelectedId(customer.id)}
+              >
+                <span className="avatar">
+                  {customer.name.slice(0, 2).toUpperCase()}
+                </span>
+                <span>
+                  <strong>{customer.name}</strong>
+                  <small>
+                    {customer.id} · {customer.city}
+                  </small>
+                </span>
+                <span
+                  className={`customer-segment segment-${labelClass(customer.segment)}`}
+                >
+                  {customer.segment}
+                </span>
+              </button>
+            ))}
+          </div>
+        </article>
+
+        {selected && (
+          <article className="panel customer-profile">
+            <div className="customer-profile-head">
+              <span className="avatar">
+                {selected.name.slice(0, 2).toUpperCase()}
+              </span>
+              <div>
+                <span>Selected synthetic customer</span>
+                <h3>{selected.name}</h3>
+                <small>
+                  {selected.id} · {selected.city}
+                </small>
+              </div>
+            </div>
+            <div className="customer-metrics">
+              <div>
+                <small>Orders</small>
+                <strong>{selected.orders}</strong>
+              </div>
+              <div>
+                <small>Lifetime value</small>
+                <strong>{selected.totalSpent}</strong>
+              </div>
+              <div>
+                <small>Last order</small>
+                <strong>{selected.lastOrder}</strong>
+              </div>
+            </div>
+            <div className="customer-support-row">
+              <div>
+                <small>Current support state</small>
+                <strong>{selected.supportState}</strong>
+              </div>
+              <div>
+                <small>Last contact</small>
+                <strong>{selected.lastContact}</strong>
+              </div>
+            </div>
+            <div className="privacy-note">
+              This public demo intentionally omits phone numbers, addresses,
+              message identifiers, and real customer details.
+            </div>
+          </article>
+        )}
+      </div>
+    </div>
   );
 }
 

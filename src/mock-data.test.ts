@@ -1,9 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { conversations, deliveries, orders, products } from "./mock-data";
+import {
+  conversations,
+  customers,
+  deliveries,
+  orders,
+  products,
+} from "./mock-data";
 
 describe("synthetic showcase data", () => {
   it("preloads every visitor-facing area", () => {
     expect(conversations.length).toBeGreaterThanOrEqual(3);
+    expect(customers.length).toBeGreaterThanOrEqual(4);
     expect(orders.length).toBeGreaterThanOrEqual(4);
     expect(products.length).toBeGreaterThanOrEqual(4);
     expect(deliveries.length).toBeGreaterThanOrEqual(4);
@@ -31,6 +38,7 @@ describe("synthetic showcase data", () => {
   it("contains no endpoints or phone-number-shaped records", () => {
     const publicDemoData = JSON.stringify({
       conversations,
+      customers,
       deliveries,
       orders,
       products,

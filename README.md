@@ -1,36 +1,83 @@
-# WhatsApp Commerce Operations — Interactive Showcase
+# WhatsApp Commerce Operations Showcase
 
-A public, synthetic demonstration of a commerce workspace designed around
-WhatsApp conversations. It shows how a fictional online store can answer
-product questions, prepare cash-on-delivery orders, track inventory and
-deliveries, and transfer a conversation to a human agent.
+A synthetic-data engineering showcase for a larger multi-tenant WhatsApp
+commerce system, presented as a setup-free interactive demo.
 
-This repository is intentionally limited to a static interface, architecture
-documentation, and generic TypeScript patterns. The production application,
-integrations, data model, infrastructure, and commercial logic remain private.
+## Live Demo
 
-## Demo
+> **Deployment URL placeholder:** `https://YOUR-PROJECT.vercel.app`
 
-**Live demo:** _Vercel URL will be added here after the first deployment._
+[**Try the interactive demo →**](https://YOUR-PROJECT.vercel.app)
 
-No login, setup, or WhatsApp account is needed. Everything is already filled
-with fictional sample data and runs entirely in the browser. Visitors can use
-the tabs to explore:
+Replace the placeholder after the first Vercel deployment. The demo is static
+and offline: it is not connected to WhatsApp, production services, or real
+customer data.
 
-- **Dashboard** — a plain-language summary of today’s store activity
-- **Conversations** — sample customer questions, verified replies, and a human
-  handoff
-- **Orders** — fictional cash-on-delivery orders and their workflow stages
-- **Products & inventory** — sample variants, prices, available stock, and
-  reservations
-- **Deliveries** — fictional parcel checkpoints and expected arrival times
+## What the project does
 
-Nothing in the demo sends messages, changes a real order, connects to an API,
-or stores visitor data.
+The interface follows a fictional retailer from a customer’s product question
+through catalog assistance, cash-on-delivery order capture, stock reservation,
+fulfillment, delivery tracking, and human support. No login or setup is needed.
 
-### Run locally
+Visitors can explore Dashboard, Conversations, Customers, Orders, Products &
+Inventory, and Deliveries using preloaded synthetic records.
 
-Requirements: Node.js 22 or newer and Corepack.
+## Key features
+
+- AI-assisted catalog sales with server-authoritative price and stock concepts
+- WhatsApp commerce and cash-on-delivery workflow demonstration
+- Customer, order, product, inventory, and delivery operations
+- Inventory reservations and guarded order-status transitions
+- Visible human handoff when automation should stop
+- Responsive, accessible navigation for desktop and mobile
+- Fully static browser experience with no API or data persistence
+
+## Engineering highlights
+
+- Multi-tenant boundaries with membership-derived tenant context
+- Role-based permissions and tenant isolation at multiple layers
+- Concurrency-safe inventory reservation patterns
+- Idempotent message, order, and background-work concepts
+- Allowlisted automation tools and authoritative commercial facts
+- Strict TypeScript and independently testable generic domain examples
+
+## Architecture
+
+The larger private system separates channel adapters, authenticated API
+boundaries, tenant-scoped domain services, data, and background work. This
+repository includes only a high-level diagram and generic examples—never the
+production schema or integrations.
+
+See [Architecture](docs/ARCHITECTURE.md) and
+[Engineering decisions](docs/ENGINEERING.md).
+
+## Security and design principles
+
+- Every displayed identity, conversation, order, product, and shipment is
+  fictional.
+- No WhatsApp session, phone number, credential, secret, production URL, or
+  customer record is required or included.
+- Prices, inventory, delivery fees, totals, and statuses are treated as
+  authoritative server facts in the documented design.
+- Automation yields to a human on policy, confidence, or customer-request
+  boundaries.
+- The public demo performs no network requests and stores no visitor data.
+
+See the [public security summary](docs/SECURITY.md).
+
+## Tech stack
+
+- React 19
+- TypeScript 5 with strict checking
+- Vite 7
+- Vitest
+- CSS with no runtime UI dependency
+- pnpm workspace tooling
+- Vercel static hosting configuration
+
+## Running locally
+
+Requirements: Node.js 22 or newer. pnpm is the recommended package manager.
 
 ```bash
 corepack enable
@@ -40,26 +87,22 @@ pnpm dev
 
 Open `http://127.0.0.1:4173`.
 
-### Deploy on Vercel
+Standard npm commands are also supported:
 
-Import this GitHub repository into Vercel and deploy it with the repository
-root as the project root. The included `vercel.json` selects the Vite preset,
-runs `pnpm build`, and publishes the generated `dist` directory. No environment
-variables, database, serverless functions, or external services are required.
+```bash
+npm install
+npm run build
+```
 
-## What this demonstrates
+## Deploying to Vercel
 
-- Product thinking across customer conversations, order capture, inventory,
-  delivery operations, and human support
-- A responsive React and TypeScript interface designed for non-technical users
-- Tenant authorization derived from verified membership rather than client
-  input
-- Guarded order transitions and concurrency-safe inventory reservations
-- Server-authoritative prices, stock, delivery fees, totals, and statuses
-- Controlled sales-assistant tools with read-only preview enforcement
-- Runnable tests for the generic engineering patterns included here
+Import this GitHub repository as a new Vercel project and keep the repository
+root as the project root. The committed `vercel.json` selects Vite, installs
+with the frozen pnpm lockfile, runs `pnpm build`, publishes `dist`, and provides
+SPA fallback routing. No environment variables or external services are
+needed.
 
-## Validation
+## Tests
 
 ```bash
 pnpm format:check
@@ -68,30 +111,30 @@ pnpm test
 pnpm build
 ```
 
-`pnpm build` creates a self-contained static site in `dist/`.
+The tests cover the public generic domain patterns and enforce synthetic-demo
+data invariants. `pnpm build` produces a self-contained static site in `dist/`.
 
-## Repository map
+## Repository limitations
 
-```text
-src/
-  domain/                 Generic, independently testable engineering patterns
-  main.tsx                Interactive synthetic operations showcase
-  mock-data.ts            Fictional conversations, products, orders and delivery records
-docs/
-  ARCHITECTURE.md         High-level system boundaries
-  ENGINEERING.md          Selected decisions and tradeoffs
-  SECURITY.md             Public security summary
-vercel.json               Static Vite deployment settings
-NOTICE.md                 Portfolio-use and copyright notice
-```
+This repository intentionally excludes the private production application,
+APIs, database schema, prompts, integrations, infrastructure, credentials,
+customer data, and proprietary commercial logic. It is a portfolio
+demonstration, not an open-source distribution or a production WhatsApp client.
+No open-source license is granted; see [NOTICE.md](NOTICE.md).
 
-## Documentation
+## Suggested GitHub metadata
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Engineering decisions](docs/ENGINEERING.md)
-- [Security approach](docs/SECURITY.md)
+Configure these manually in the repository’s **About** settings:
 
-## Source availability
+**Description**
 
-This is a portfolio demonstration, not an open-source distribution of the
-commercial system. No open-source license is granted. See [NOTICE.md](NOTICE.md).
+> Interactive showcase of an AI-assisted WhatsApp commerce operations platform
+> built with React + TypeScript.
+
+**Topics**
+
+`react` · `typescript` · `whatsapp` · `ai` · `ecommerce` · `saas` ·
+`inventory-management` · `order-management`
+
+After deployment, place the Vercel URL in GitHub’s **Website** field and replace
+the Live Demo placeholder near the top of this file.
