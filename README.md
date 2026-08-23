@@ -4,10 +4,7 @@ A synthetic-data engineering showcase for a larger multi-tenant WhatsApp
 commerce system, presented as a setup-free interactive demo.
 
 ## Live Demo
-
-> **Deployment URL placeholder:** `https://YOUR-PROJECT.vercel.app`
-
-[**Try the interactive demo →**](https://YOUR-PROJECT.vercel.app)
+[**Try the interactive demo →**](https://whatsapp-commerce-showcase.vercel.app)
 
 Replace the placeholder after the first Vercel deployment. The demo is static
 and offline: it is not connected to WhatsApp, production services, or real
